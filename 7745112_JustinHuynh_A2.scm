@@ -16,6 +16,7 @@
 
 ;QUESTION 2
 
+;*******absDiffA(listA listB)*****
 ;Assumes that the missing elements in the shorter list have the value of 0.
 ;The result will be of length equal to the longer list.
 (define (absDiffA listA listB)
@@ -31,9 +32,21 @@
       L1
       (append-zero (append L1 '(0)) (- Num 1))))
 
+;*********absDiffB(listA listB) *****
 ;Ignores the extra values of the longer list. The result will be of length equal
 ;to the shorter list
-;(define (absDiffB listA listB)
-;  )
+(define (absDiffB listA listB)
+(cond ((> (length listA) (length listB)) (map abs (map - (shorten-list listA '() (length listB)) listB)))
+      ((> (length listB) (length listA)) (map abs (map - (shorten-list listB '() (length listA)) listA)))
+      ((= (length listA) (length listB))
+       (map abs (map - listA listB)))))
+
+;Num = Desired length of the list
+;L2 = Shortened list to length Num                                                          
+(define (shorten-list L1 L2 Num)
+  (if (= Num 0)
+      L2
+      (shorten-list (cdr L1) (append L2 (list(car L1))) (- Num 1))))
+      
 			
 			
