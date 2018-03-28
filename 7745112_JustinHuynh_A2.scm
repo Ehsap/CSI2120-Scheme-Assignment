@@ -60,7 +60,7 @@
     (else
      (duplicatePair-aux (delete (car L) L)  (append L2 (list(cons (car L) (count (car L) L))))))))
 
-;Question 3b)
+;QUESTION 3b)
 (define (duplicateList L)
   (if (null? L)
       L
@@ -71,6 +71,18 @@
     ((null? L) L2)
     (else
      (duplicateList-aux (delete (car L) L) (append L2 (list(append (list(car L)) (list(count (car L) L)))))))))
+
+;QUESTION 3c)
+(define (duplicateListSorted L)
+  (if (null? L)
+      L
+      (duplicateListSorted-aux L '())))
+
+(define (duplicateListSorted-aux L L2)
+  (cond
+    ((null? L) (sort L2 #:key second >))
+               (else
+                (duplicateListSorted-aux(delete (car L) L) (append L2 (list(append (list(car L)) (list(count (car L) L)))))))))
 
 
 ;Deletes all occurences of an item in a list
@@ -87,8 +99,12 @@
 (duplicatePair '(1 a 5 6 2 b a 5 5))
 (duplicatePair '(b a a a))
 
-(duplicateList '(1 a 5 6 2 b a 5 5))
-(duplicateList '(b a a a))
+;(duplicateList '(1 a 5 6 2 b a 5 5))
+;(duplicateList '(b a a a))
+
+(duplicateListSorted '(1 a 5 6 2 b a 5 5))
+(duplicateListSorted '(b a a a))
+
 
 			
 			
