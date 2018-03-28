@@ -47,6 +47,31 @@
   (if (= Num 0)
       L2
       (shorten-list (cdr L1) (append L2 (list(car L1))) (- Num 1))))
-      
+
+;QUESTION 3
+(define (duplicatePair L)
+  (if (null? L)
+      L
+      (duplicatePair-aux L '())))
+
+(define (duplicatePair-aux L L2)
+  (cond
+    ((null? L) L2)
+    (else
+     (duplicatePair-aux (delete (car L) L)  (append L2 (list(cons (car L) (count (car L) L))))))))
+
+
+;Deletes all occurences of an item in a list
+(define (delete item list) (filter (lambda (x) (not (equal? x item))) list))
+
+;Counts how many times element e appears in list L
+(define count
+  (lambda (e L)
+    (cond
+      ((null? L)     0)
+      ((equal? e (car L)) (+ 1 (count e (cdr L))))
+      (else          (count e (cdr L))))))
+  
+(duplicatePair '(1 a 5 6 2 b a 5 5))
 			
 			
