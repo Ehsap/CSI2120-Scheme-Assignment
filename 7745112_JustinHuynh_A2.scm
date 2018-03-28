@@ -48,7 +48,7 @@
       L2
       (shorten-list (cdr L1) (append L2 (list(car L1))) (- Num 1))))
 
-;QUESTION 3
+;QUESTION 3a)
 (define (duplicatePair L)
   (if (null? L)
       L
@@ -59,6 +59,18 @@
     ((null? L) L2)
     (else
      (duplicatePair-aux (delete (car L) L)  (append L2 (list(cons (car L) (count (car L) L))))))))
+
+;Question 3b)
+(define (duplicateList L)
+  (if (null? L)
+      L
+      (duplicateList-aux L '())))
+
+(define (duplicateList-aux L L2)
+  (cond
+    ((null? L) L2)
+    (else
+     (duplicateList-aux (delete (car L) L) (append L2 (list(append (list(car L)) (list(count (car L) L)))))))))
 
 
 ;Deletes all occurences of an item in a list
@@ -73,5 +85,10 @@
       (else          (count e (cdr L))))))
   
 (duplicatePair '(1 a 5 6 2 b a 5 5))
+(duplicatePair '(b a a a))
+
+(duplicateList '(1 a 5 6 2 b a 5 5))
+(duplicateList '(b a a a))
+
 			
 			
